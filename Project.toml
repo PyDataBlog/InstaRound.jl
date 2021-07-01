@@ -1,0 +1,13 @@
+name = "InstaRound"
+uuid = "609f54d3-8a97-4836-aa37-e3dc8f03ac88"
+authors = ["PyDataBlog <pimpfada@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
