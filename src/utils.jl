@@ -1,7 +1,7 @@
 """
     business_round(num)
 
-
+Internal function to round a number to the nearest IG style.
 """
 function business_round(num)
     if num < 10^3
@@ -41,9 +41,20 @@ end
 
 
 """
-    round(::Type{IGRound}, x)
+    round(::Type{IGRound}, x::Number)
+
+Main function to round a number x to the nearest IG style.
+
+# Arguments
+ * x: The number to round.
+
+```
+# Example
+julia> round(IGRound, 100_000)
+"100K"
+```
 """
-function round(::Type{IGRound}, x)
-    init_round = Base.round(BigInt, x)
+function round(::Type{IGRound}, x::Number)
+    init_round = Base.round(Int, x)
     return init_round |> business_round
 end
