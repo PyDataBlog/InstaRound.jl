@@ -1,7 +1,7 @@
 """
     business_round(num)
 
-Internal function to round a number to the nearest IG style.
+Internal function to round a number (num) to the nearest IG style.
 """
 function business_round(num)
     if num < 10^3
@@ -48,7 +48,7 @@ Main function to round a number x to the nearest IG style.
 # Arguments
  * x: The number to round.
 
-```
+```julia
 # Example
 julia> round(IGRound, 100_000)
 "100K"
