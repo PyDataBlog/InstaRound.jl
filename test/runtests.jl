@@ -2,6 +2,7 @@ using InstaRound
 using Test
 
 @testset "InstaRound.jl" begin
+    @test round(IGRound, 999) == "999"
     @test round(IGRound, 1_000) == "1K"
     @test round(IGRound, 10_000) == "10K"
     @test round(IGRound, 100_000) == "100K"
