@@ -1,7 +1,7 @@
 """
     log_transformer(x)
 
-Internal function to apply the log transform to x.
+Internal function to exponent of x.
 Used to select the nearest unit index.
 """
 function log_transformer(x)
@@ -30,14 +30,14 @@ Internal function to extract the identifying unit from a number.
 """
 function extract_identifying_unit(num::Number, names::Bool)
     log_pos = log_transformer(num)
-    div_3 = div(log_pos, 3)
+    div_3 = log_pos ÷ 3
 
     if names
         unit =  unit_names[div_3]
     else
         unit = units[div_3]
     end
-    identifier = num / ( BigInt(10) ^ (3 * div_3) ) |> x -> string(floor(BigInt, x))
+    identifier = num / ( BigInt(10) ^ (3 * div_3) ) |> x -> string(floor(Int, x))
 
     return string(identifier, unit)
 end
