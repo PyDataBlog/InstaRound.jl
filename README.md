@@ -23,6 +23,7 @@ pkg> add InstaRound
 ```
 
 ## Basic Usage
+
 Round numbers with IGRound
 
 ```julia
