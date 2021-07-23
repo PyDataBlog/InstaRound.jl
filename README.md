@@ -27,6 +27,9 @@ Round numbers with IGRound
 ```julia
 using InstaRound
 
-julia> round(IGRound, 1_000_000)
+julia> round(IGRound, 1_000_000; names=false)
 "1M"
+
+julia> round(IGRound, 1_000_000; names=true)
+"1Million"
 ```
