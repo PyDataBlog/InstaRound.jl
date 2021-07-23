@@ -28,7 +28,7 @@ Round numbers with IGRound
 ```julia
 using InstaRound
 
-julia> round(IGRound, 1_000_000)
+julia> round(IGRound, 1_000_000; names=false)
 "1M"
 ```
 
@@ -46,7 +46,7 @@ df = yahoo(:AMZN, YahooOpt(period1 = start))
 ```
 
 ```julia
-julia> round.(IGRound, df.AdjClose)
+julia> round.(IGRound, df.AdjClose; names=false)
 1137×1 TimeArray{String, 1, Date, Vector{String}} 2017-01-03 to 2021-07-09
 │            │ AdjClose │
 ├────────────┼──────────┤

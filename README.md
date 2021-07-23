@@ -20,6 +20,7 @@ or switch to `Pkg` mode with `]` and issue
 
 ```julia
 pkg> add InstaRound
+```
 
 ## Basic Usage
 Round numbers with IGRound
