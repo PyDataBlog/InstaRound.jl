@@ -55,7 +55,7 @@ Function to round a number x to the nearest IG style.
 # Example
 
 ```julia-repl
-julia> round(IGRound, 100_000)
+julia> round(IGRound, 100_000; names=true)
 "100Thousand"
 ```
 """
