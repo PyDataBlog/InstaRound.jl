@@ -1,6 +1,6 @@
 module InstaRound
 
-# Write your package code here.
+# Import Base round
 import Base: round
 
 
@@ -9,7 +9,7 @@ include("utils.jl")
 
 
 ####### Globals Exports #######
-export round, IGRound
+export IGRound
 
 
 end

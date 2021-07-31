@@ -1,60 +1,65 @@
 """
-    business_round(num)
+    log_transformer(x)
 
-Internal function to round a number to the nearest IG style.
+Internal function used to get the exponent of x.
+Used to select the nearest unit index.
 """
-function business_round(num)
-    if num < 10^3
-        return string(num)
-    elseif num < 10^4
-        return string(string(num)[1], "K")
-    elseif num < 10^5
-        return string(string(num)[1:2], "K")
-    elseif num < 10^6
-        return string(string(num)[1:3], "K")
-    elseif num < 10^7
-        return string(string(num)[1], "M")
-    elseif num < 10^8
-        return string(string(num)[1:2], "M")
-    elseif num < 10^9
-        return string(string(num)[1:3], "M")
-    elseif num < 10^10
-        return string(string(num)[1], "B")
-    elseif num < 10^11
-        return string(string(num)[1:2], "B")
-    elseif num < 10^12
-        return string(string(num)[1:3], "B")
-    elseif num < 10^13
-        return string(string(num)[1], "T")
-    elseif num < 10^14
-        return string(string(num)[1:2], "T")
-    elseif num < 10^15
-        return string(string(num)[1:3], "T")
-    elseif num < 10^16
-        return string(string(num)[1], "Q")
-    elseif num < 10^17
-        return string(string(num)[1:2], "Q")
-    elseif num < 10^18
-        return string(string(num)[1:3], "Q")
+function log_transformer(x)
+    return floor(Int, log10(x))
+end
+
+
+"""
+    business_round(number::Number, names::Bool)
+
+Internal function to round a number (num) to the nearest IG style.
+"""
+function business_round(number::Number, names::Bool)
+    if number < 1000
+        return string(number)
+    else
+        return extract_identifying_unit(number, names)
     end
 end
 
 
 """
-    round(::Type{IGRound}, x::Number)
+    extract_identifying_unit(num::Number, names::Bool)
 
-Main function to round a number x to the nearest IG style.
+Internal function to extract the identifying unit from a number.
+"""
+function extract_identifying_unit(num::Number, names::Bool)
+    log_pos = log_transformer(num)
+    div_3 = log_pos ÷ 3
+
+    if names
+        unit =  unit_names[div_3]
+    else
+        unit = units[div_3]
+    end
+    identifier = num / ( BigInt(10) ^ (3 * div_3) ) |> x -> string(floor(Int, x))
+
+    return string(identifier, unit)
+end
+
+
+"""
+    round(::Type{IGRound}, x::Number; names::Bool=false)
+
+Function to round a number x to the nearest IG style.
 
 # Arguments
- * x: The number to round.
+ * x: The number to be rounded.
+ * names: If true, the unit will be names, if false, the unit will be the number.
 
-```
 # Example
-julia> round(IGRound, 100_000)
-"100K"
+
+```julia-repl
+julia> round(IGRound, 100_000; names=true)
+"100Thousand"
 ```
 """
-function round(::Type{IGRound}, x::Number)
-    init_round = Base.round(Int, x)
-    return init_round |> business_round
+function round(::Type{IGRound}, x::Number; names::Bool=false)
+    init_round =  Base.round(BigInt, x)
+    return business_round(init_round, names)
 end
