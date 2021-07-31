@@ -1,7 +1,7 @@
 """
     log_transformer(x)
 
-Internal function to exponent of x.
+Internal function used to get the exponent of x.
 Used to select the nearest unit index.
 """
 function log_transformer(x)
