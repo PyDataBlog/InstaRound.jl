@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Home · InstaRound.jl</title><script data-outdated-warner src="assets/warner.js"></script><link rel="canonical" href="https://PyDataBlog.github.io/InstaRound.jl/"/><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.039/juliamono-regular.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="assets/documenter.js"></script><script src="siteinfo.js"></script><script src="../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href>InstaRound.jl</a></span></div><form class="docs-search" action="search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Home</a><ul class="internal"><li><a class="tocitem" href="#Installation"><span>Installation</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Home</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Home</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/PyDataBlog/InstaRound.jl/blob/master/docs/src/index.md#" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="InstaRound"><a class="docs-heading-anchor" href="#InstaRound">InstaRound</a><a id="InstaRound-1"></a><a class="docs-heading-anchor-permalink" href="#InstaRound" title="Permalink"></a></h1><p>Documentation for <a href="https://github.com/PyDataBlog/InstaRound.jl">InstaRound</a>.</p><p>A simple package for extending Base.round with instagram like rounding.</p><h2 id="Installation"><a class="docs-heading-anchor" href="#Installation">Installation</a><a id="Installation-1"></a><a class="docs-heading-anchor-permalink" href="#Installation" title="Permalink"></a></h2><p>To install <code>InstaRound</code> either do</p><pre><code class="language-julia">using Pkg
+Pkg.add(&quot;InstaRound&quot;)</code></pre><p>or switch to <code>Pkg</code> mode with <code>]</code> and issue</p><pre><code class="language-julia">pkg&gt; add InstaRound
+
+## Basic Usage
+Round numbers with IGRound
+</code></pre><p>julia using InstaRound</p><p>julia&gt; round(IGRound, 1<em>000</em>000; names=false) &quot;1M&quot;</p><pre><code class="nohighlight">
+## Practical Use Case
+</code></pre><p>julia using InstaRound using MarketData using Dates</p><p>start = DateTime(2017, 1, 1) df = yahoo(:AMZN, YahooOpt(period1 = start))</p><pre><code class="nohighlight"></code></pre><p>julia julia&gt; round.(IGRound, df.AdjClose; names=false) 1137×1 TimeArray{String, 1, Date, Vector{String}} 2017-01-03 to 2021-07-09 │            │ AdjClose │ ├────────────┼──────────┤ │ 2017-01-03 │ &quot;754&quot;    │ │ 2017-01-04 │ &quot;757&quot;    │ │ 2017-01-05 │ &quot;780&quot;    │ │ ⋮          │ ⋮        │ │ 2021-07-07 │ &quot;3K&quot;     │ │ 2021-07-08 │ &quot;3K&quot;     │ │ 2021-07-09 │ &quot;3K&quot;     │</p><pre><code class="nohighlight">
+## Abbreviation Source
+
+|Abbreviation|Name             |Value|Equivalent|
+|:----------:|:---------------:|:---:|:--------:|
+|     K      | Thousand (Kilo) |10^3 |   1000   |
+|     M      |     Million     |10^6 |  1000K   |
+|     B      |     Billion     |10^9 |  1000M   |
+|     t      |    Trillion     |10^12|  1000B   |
+|     q      |   Quadrillion   |10^15|  1000t   |
+|     Q      |   Quintillion   |10^18|  1000q   |
+|     s      |   Sextillion    |10^21|  1000Q   |
+|     S      |   Septillion    |10^24|  1000s   |
+|     o      |    Octillion    |10^27|  1000S   |
+|     n      |    Nonillion    |10^30|  1000o   |
+|     d      |    Decillion    |10^33|  1000n   |
+|     U      |   Undecillion   |10^36|  1000d   |
+|     D      |  Duodecillion   |10^39|  1000U   |
+|     T      |  Tredecillion   |10^42|  1000D   |
+|     Qt     |Quattuordecillion|10^45|  1000T   |
+|     Qd     |  Quindecillion  |10^48|  1000Qt  |
+|     Sd     |  Sexdecillion   |10^51|  1000Qd  |
+|     St     | Septendecillion |10^54|  1000Sd  |
+|     O      |  Octodecillion  |10^57|  1000St  |
+|     N      | Novemdecillion  |10^60|  1000O   |
+|     v      |  Vigintillion   |10^63|  1000N   |
+|     c      | Unvigintillion  |10^66|  1000v   |
+</code></pre><p>@index</p><pre><code class="nohighlight"></code></pre><p>@autodocs Modules = [InstaRound] ```</p></article><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.3 on <span class="colophon-date" title="Tuesday 3 August 2021 13:32">Tuesday 3 August 2021</span>. Using Julia version 1.6.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
