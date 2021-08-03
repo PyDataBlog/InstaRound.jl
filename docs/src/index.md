@@ -21,8 +21,10 @@ or switch to `Pkg` mode with `]` and issue
 
 ```julia
 pkg> add InstaRound
+```
 
 ## Basic Usage
+
 Round numbers with IGRound
 
 ```julia
@@ -38,7 +40,6 @@ julia> round(IGRound, 1_000_000; names=false)
 using InstaRound
 using MarketData
 using Dates
-
 
 
 start = DateTime(2017, 1, 1)
