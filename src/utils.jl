@@ -24,6 +24,24 @@ end
 
 
 """
+    number_groups(s::AbstractString)
+
+Internal function to extract the two groups of numbers from a '.' separated string.
+"""
+function number_groups(s::AbstractString)
+    group_1 = match(r"(\d+)", s)[1]
+    group_2 = match(r"(\d+$)", s)[1]
+
+    if length(group_2) > 1
+        group_2 = group_2[1:2]
+    else
+        group_2 = group_2[1]
+    end
+    return group_1, group_2
+end
+
+
+"""
     extract_identifying_unit(num::Number, names::Bool)
 
 Internal function to extract the identifying unit from a number.
@@ -37,9 +55,11 @@ function extract_identifying_unit(num::Number, names::Bool)
     else
         unit = units[div_3]
     end
-    identifier = num / ( BigInt(10) ^ (3 * div_3) ) |> x -> string(floor(Int, x))
 
-    return string(identifier, unit)
+    bs = string(num / ( BigInt(10) ^ (3 * div_3) ))
+    main_int, rem_float = number_groups(bs)
+
+    return string(main_int, ".", rem_float, unit)
 end
 
 
