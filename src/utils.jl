@@ -40,7 +40,6 @@ function number_groups(s::AbstractString)
     return group_1, group_2
 end
 
-
 """
     extract_identifying_unit(num::Number, names::Bool)
 
@@ -56,10 +55,14 @@ function extract_identifying_unit(num::Number, names::Bool)
         unit = units[div_3]
     end
 
-    bs = string(num / ( BigInt(10) ^ (3 * div_3) ))
-    main_int, rem_float = number_groups(bs)
+    indentifier = string(num / ( BigInt(10) ^ (3 * div_3) ))
+    main_int, rem_float = number_groups(indentifier)
 
-    return string(main_int, ".", rem_float, unit)
+    if names
+        return string(main_int, ".", rem_float, " ", unit)
+    else
+        return string(main_int, ".", rem_float, unit)
+    end
 end
 
 
