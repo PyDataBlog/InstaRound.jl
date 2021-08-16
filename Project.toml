@@ -1,6 +1,6 @@
 name = "InstaRound"
 uuid = "609f54d3-8a97-4836-aa37-e3dc8f03ac88"
-authors = ["PyDataBlog <pimpfada@gmail.com> and contributors"]
+authors = ["PyDataBlog <pimpfada@gmail.com>"]
 version = "0.2.0"
 
 [compat]

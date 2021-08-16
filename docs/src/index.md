@@ -31,33 +31,63 @@ Round numbers with IGRound
 using InstaRound
 
 julia> round(IGRound, 1_000_000; names=false)
-"1M"
+"1.0M"
+
+julia> round(IGRound, 1_000_000; names=true)
+"1.0 Million"
 ```
 
 ## Practical Use Case
 
 ```julia
 using InstaRound
-using MarketData
-using Dates
+using PolygonIO
+using DataFrames
 
 
-start = DateTime(2017, 1, 1)
-df = yahoo(:AMZN, YahooOpt(period1 = start))
+opts = PolyOpts(API_KEY, DataFrame)
+bars_df = crypto_aggregates_bars(opts, "X:BTCUSD", 5, "minute", "2020-10-14", "2020-10-16")
 ```
 
-```julia
-julia> round.(IGRound, df.AdjClose; names=false)
-1137×1 TimeArray{String, 1, Date, Vector{String}} 2017-01-03 to 2021-07-09
-│            │ AdjClose │
-├────────────┼──────────┤
-│ 2017-01-03 │ "754"    │
-│ 2017-01-04 │ "757"    │
-│ 2017-01-05 │ "780"    │
-│ ⋮          │ ⋮        │
-│ 2021-07-07 │ "3K"     │
-│ 2021-07-08 │ "3K"     │
-│ 2021-07-09 │ "3K"     │
+```julia-repl
+julia> round.(IGRound, bars_df.c; names=false)
+24-element Vector{String}:
+ "11.42K"
+ "11.42K"
+ "11.44K"
+ "11.45K"
+ "11.45K"
+ "11.45K"
+ "11.45K"
+ ⋮
+ "11.44K"
+ "11.44K"
+ "11.44K"
+ "11.45K"
+ "11.45K"
+ "11.45K"
+ "11.44K"
+```
+
+```julia-repl
+julia> round.(IGRound, bars_df.c; names=true)
+24-element Vector{String}:
+ "11.42 Thousand"
+ "11.42 Thousand"
+ "11.44 Thousand"
+ "11.45 Thousand"
+ "11.45 Thousand"
+ "11.45 Thousand"
+ "11.45 Thousand"
+ ⋮
+ "11.44 Thousand"
+ "11.44 Thousand"
+ "11.44 Thousand"
+ "11.45 Thousand"
+ "11.45 Thousand"
+ "11.45 Thousand"
+ "11.44 Thousand"
+
 ```
 
 ## Abbreviation Source

@@ -30,8 +30,8 @@ Round numbers with IGRound
 using InstaRound
 
 julia> round(IGRound, 1_000_000; names=false)
-"1M"
+"1.0M"
 
 julia> round(IGRound, 1_000_000; names=true)
-"1Million"
+"1.0 Million"
 ```
