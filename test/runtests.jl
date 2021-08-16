@@ -141,3 +141,7 @@ end
     @test round(IGRound, BigInt(10) ^ 67; names=true) == "10.0 Unvigintillion"
     @test round(IGRound, BigInt(10) ^ 68; names=true) == "100.0 Unvigintillion"
 end
+
+@testset "With floating points" begin
+    @test round(IGRound, 4_123_456) == "4.12M"
+end
