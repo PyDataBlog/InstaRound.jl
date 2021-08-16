@@ -20,9 +20,6 @@ function business_round(number::Number, names::Bool)
     else
         return extract_identifying_unit(number, names)
     end
-    identifier = num / ( BigInt(10) ^ (3 * div_3) ) |> x -> string(floor(Int, x))
-
-    return string(identifier, unit)
 end
 
 
